@@ -27,7 +27,7 @@ document.getElementById("loginBtn").addEventListener("click", async function () 
     const password = document.getElementById("password").value.trim();
 
     try {
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("https://barman-wallpapers.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

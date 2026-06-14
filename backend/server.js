@@ -18,8 +18,10 @@ if (!fs.existsSync(uploadsPath)) {
     fs.mkdirSync(uploadsPath);
 }
 
-app.use("/uploads", express.static(uploadsPath));
-
+app.use(cors({
+  origin: "https://lustrous-lokum-f7460a.netlify.app",
+  methods: ["GET", "POST", "DELETE"]
+}));
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, uploadsPath);
