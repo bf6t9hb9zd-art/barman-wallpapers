@@ -207,3 +207,15 @@ header {
   flex-direction: column;
   align-items: center;
 }
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.logo {
+  display: none; /* hides any leftover logo styling */
+}
