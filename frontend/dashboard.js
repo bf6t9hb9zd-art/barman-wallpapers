@@ -1,6 +1,7 @@
 if (localStorage.getItem("admin") !== "true") {
     window.location.href = "login.html";
 }
+
 const API = "https://barman-wallpapers.onrender.com";
 
 async function loadDashboard() {
@@ -15,12 +16,15 @@ async function loadDashboard() {
     data.forEach(wp => {
         gallery.innerHTML += `
             <div class="card">
-                <img src="${API}/uploads/${wp.filename}" />
+                <img src="${API}/uploads/${wp.filename}" alt="${wp.title}">
                 <h3>${wp.title}</h3>
 
-                <button onclick="deleteWallpaper(${wp.id})">
-                    🗑 Delete
-                </button>
+                <div class="admin-buttons">
+                    <button class="delete-btn"
+                        onclick="deleteWallpaper(${wp.id})">
+                        🗑 Delete
+                    </button>
+                </div>
             </div>
         `;
     });
