@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 20px;
+  background: black;
+  border-bottom: 2px solid gold;
+}
+
+header h1 {
+  color: gold;
+}
+
+/* UPLOAD */
+.upload-box {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.upload-box input, button {
+  padding: 10px;
+}
+
+button {
+  background: gold;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+.owner-badge {
+    color: gold;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: gold;
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.download-btn:hover {
+    background: #ffd700;
+}
+.logo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.verified-badge {
+    background: gold;
+    color: black;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #ccc;
+    margin-top: 10px;
+}
+
+#searchInput {
+    margin-top: 15px;
+    width: 300px;
+    max-width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}

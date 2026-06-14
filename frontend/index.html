@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BARMAN Wallpapers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+ <header>
+    <div class="logo-section">
+        <h1>BARMAN Wallpapers</h1>
+        <span class="verified-badge">✔ VERIFIED OWNER</span>
+    </div>
+
+    <p class="subtitle">
+        Powered by BARMAN Solutions PTY LTD
+    </p>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search wallpapers..."
+    >
+</header>
+
+
+<section class="upload-box">
+  <input type="text" id="title" placeholder="Wallpaper title">
+  <input type="file" id="image">
+  <button onclick="uploadWallpaper()">Upload</button>
+</section>
+
+<section class="gallery" id="gallery"></section>
+
+<script src="script.js"></script>
+</body>
+</html>
