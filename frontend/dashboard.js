@@ -1,7 +1,7 @@
 if (localStorage.getItem("admin") !== "true") {
     window.location.href = "login.html";
 }
-const API = "http://localhost:3000";
+const API = "https://barman-wallpapers.onrender.com";
 
 async function loadDashboard() {
     const res = await fetch(`${API}/wallpapers`);
