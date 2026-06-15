@@ -27,34 +27,25 @@
 
   <div class="dash-title">🛡️ Owner Dashboard</div>
 
-  <!-- STATS (clickable filters) -->
+  <!-- STATS -->
   <div class="dash-stats">
-    <div class="dash-stat dash-stat-clickable active" data-device-filter="All" onclick="setDashDeviceFilter('All', this)">
+    <div class="dash-stat">
       <div class="dash-stat-val" id="stat-total">0</div>
-      <div class="dash-stat-label">All Wallpapers</div>
-    </div>
-    <div class="dash-stat dash-stat-clickable" data-device-filter="PC" onclick="setDashDeviceFilter('PC', this)">
-      <div class="dash-stat-val" id="stat-pc">0</div>
-      <div class="dash-stat-label">💻 PC</div>
-    </div>
-    <div class="dash-stat dash-stat-clickable" data-device-filter="Phone" onclick="setDashDeviceFilter('Phone', this)">
-      <div class="dash-stat-val" id="stat-phone">0</div>
-      <div class="dash-stat-label">📱 Phone</div>
+      <div class="dash-stat-label">Total Wallpapers</div>
     </div>
     <div class="dash-stat">
       <div class="dash-stat-val">BARMAN</div>
       <div class="dash-stat-label">Owner</div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-val">Free</div>
+      <div class="dash-stat-label">Downloads</div>
     </div>
   </div>
 
   <!-- UPLOAD -->
   <div class="upload-card">
     <h3>⬆️ Upload New Wallpaper</h3>
-
-    <div id="dash-upload-preview" style="display:none;margin-bottom:14px">
-      <img id="dash-upload-img" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px;border:1px solid rgba(212,175,55,0.3)">
-    </div>
-
     <div class="upload-fields">
       <input type="text" id="title" placeholder="Wallpaper title">
       <select id="category">
@@ -67,12 +58,8 @@
         <option value="Cars">🚗 Cars</option>
         <option value="Technology">💻 Technology</option>
       </select>
-      <select id="device">
-        <option value="PC">💻 PC (Landscape)</option>
-        <option value="Phone">📱 Phone (Portrait)</option>
-      </select>
       <label class="file-label">
-        <input type="file" id="image" accept="image/*" onchange="previewDashUpload()">
+        <input type="file" id="image" accept="image/*" onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'Choose image...'">
         <span id="file-name">Choose image...</span>
       </label>
       <button class="upload-btn" onclick="uploadWallpaper()">⬆️ Publish</button>
@@ -80,7 +67,7 @@
     <div id="upload-msg" style="margin-top:12px;font-size:13px;color:#888"></div>
   </div>
 
-  <!-- TABLE (with Device column) -->
+  <!-- TABLE -->
   <div class="dash-table-wrap">
     <table class="dash-table">
       <thead>
@@ -88,13 +75,12 @@
           <th>Preview</th>
           <th>Title</th>
           <th>Category</th>
-          <th>Device</th>
           <th>Uploaded</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody id="dash-tbody">
-        <tr><td colspan="6" style="text-align:center;padding:30px;color:#555">Loading...</td></tr>
+        <tr><td colspan="5" style="text-align:center;padding:30px;color:#555">Loading...</td></tr>
       </tbody>
     </table>
   </div>
