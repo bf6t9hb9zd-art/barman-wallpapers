@@ -1,49 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BARMAN Owner Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARMAN Solutions — Owner Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>🔥 BARMAN OWNER DASHBOARD</h1>
-    <p>Full Control Panel</p>
-</header>
+<nav class="navbar">
+  <div class="nav-logo">
+    <div class="logo-icon"><span class="logo-b">B</span></div>
+    <div class="logo-text-wrap">
+      <span class="logo-main">BARMAN</span>
+      <span class="logo-sub">SOLUTIONS</span>
+    </div>
+    <div class="logo-badge">✔ OWNER</div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Gallery</a>
+    <a href="#" class="nav-link" onclick="logout()">Logout</a>
+  </div>
+</nav>
 
-<section class="upload-section">
+<div class="dashboard-page">
 
-    <h2>Upload Wallpaper</h2>
+  <div class="dash-title">🛡️ Owner Dashboard</div>
 
-    <input type="text" id="title" placeholder="Wallpaper Title">
+  <!-- STATS -->
+  <div class="dash-stats">
+    <div class="dash-stat">
+      <div class="dash-stat-val" id="stat-total">0</div>
+      <div class="dash-stat-label">Total Wallpapers</div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-val">BARMAN</div>
+      <div class="dash-stat-label">Owner</div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-val">Free</div>
+      <div class="dash-stat-label">Downloads</div>
+    </div>
+  </div>
 
-    <!-- NEW CATEGORY DROPDOWN -->
-    <select id="category">
-        <option value="Cars">🚗 Cars</option>
-        <option value="Anime">🎌 Anime</option>
-        <option value="Gaming">🎮 Gaming</option>
+  <!-- UPLOAD -->
+  <div class="upload-card">
+    <h3>⬆️ Upload New Wallpaper</h3>
+    <div class="upload-fields">
+      <input type="text" id="title" placeholder="Wallpaper title">
+      <select id="category">
         <option value="Nature">🌿 Nature</option>
-        <option value="Sports">⚽ Sports</option>
-    </select>
+        <option value="City">🏙️ City</option>
+        <option value="Space">🌌 Space</option>
+        <option value="Abstract">🔮 Abstract</option>
+        <option value="Dark">🌑 Dark</option>
+        <option value="Anime">✨ Anime</option>
+        <option value="Cars">🚗 Cars</option>
+        <option value="Technology">💻 Technology</option>
+      </select>
+      <label class="file-label">
+        <input type="file" id="image" accept="image/*" onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'Choose image...'">
+        <span id="file-name">Choose image...</span>
+      </label>
+      <button class="upload-btn" onclick="uploadWallpaper()">⬆️ Publish</button>
+    </div>
+    <div id="upload-msg" style="margin-top:12px;font-size:13px;color:#888"></div>
+  </div>
 
-    <input type="file" id="image">
+  <!-- TABLE -->
+  <div class="dash-table-wrap">
+    <table class="dash-table">
+      <thead>
+        <tr>
+          <th>Preview</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Uploaded</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="dash-tbody">
+        <tr><td colspan="5" style="text-align:center;padding:30px;color:#555">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    <button onclick="uploadWallpaper()">
-        Upload Wallpaper
-    </button>
-
-</section>
-
-<section class="stats">
-    <h2>Total Wallpapers: <span id="count">0</span></h2>
-</section>
-
-<section class="gallery" id="adminGallery"></section>
+</div>
 
 <script src="dashboard.js"></script>
-
 </body>
 </html>

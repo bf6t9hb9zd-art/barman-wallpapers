@@ -1,4 +1,5 @@
 const API = "https://barman-wallpapers.onrender.com";
+let activeCategory = "All";
 
 async function loadWallpapers() {
     try {
@@ -6,56 +7,64 @@ async function loadWallpapers() {
         const data = await res.json();
 
         const gallery = document.getElementById("gallery");
-        const searchInput = document.getElementById("searchInput");
-        const searchText = searchInput?.value.toLowerCase() || "";
+        const searchText = document.getElementById("searchInput")?.value.toLowerCase() || "";
+
+        // Update count
+        document.getElementById("total-count").textContent = data.length;
+
+        // Filter by search + category
+        const filtered = data.filter(wp => {
+            const matchSearch = wp.title.toLowerCase().includes(searchText);
+            const matchCat = activeCategory === "All" || wp.category === activeCategory;
+            return matchSearch && matchCat;
+        });
 
         gallery.innerHTML = "";
 
-        data.filter(wp => wp.title.toLowerCase().includes(searchText))
-            .forEach(wp => {
-                gallery.innerHTML += `
-                    <div class="card">
-                        <img src="${API}/uploads/${wp.filename}" alt="${wp.title}">
-                        <h3>${wp.title}</h3>
-                        <p class="owner-badge">✓ Uploaded by BARMAN (Owner)</p>
-                        <a class="download-btn" href="${API}/uploads/${wp.filename}" download>
-                            ⬇ Download
-                        </a>
-                    </div>
-                `;
-            });
+        if (filtered.length === 0) {
+            gallery.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🖼️</div>
+                    <p>No wallpapers found in this category.</p>
+                </div>`;
+            return;
+        }
+
+        filtered.forEach((wp, i) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style.animationDelay = `${i * 0.06}s`;
+            card.innerHTML = `
+                <div class="card-img-wrap">
+                    <img src="${API}/uploads/${wp.filename}" alt="${wp.title}" loading="lazy">
+                    <span class="card-category">${wp.category || 'General'}</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">${wp.title}</div>
+                    <div class="card-owner">✓ BARMAN Solutions</div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn-download" href="${API}/uploads/${wp.filename}" download>⬇ Download</a>
+                </div>
+            `;
+            gallery.appendChild(card);
+        });
+
     } catch (error) {
         console.error("Error loading wallpapers:", error);
+        document.getElementById("gallery").innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">⚠️</div>
+                <p>Could not load wallpapers. Server may be waking up — try again in 30 seconds.</p>
+            </div>`;
     }
 }
 
-async function uploadWallpaper() {
-    const title = document.getElementById("title").value;
-    const image = document.getElementById("image").files[0];
-
-    if (!image) { alert("Please select an image."); return; }
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("image", image);
-
-    try {
-        const response = await fetch(`${API}/upload`, {
-            method: "POST",
-            body: formData
-        });
-
-        if (response.ok) {
-            document.getElementById("title").value = "";
-            document.getElementById("image").value = "";
-            loadWallpapers();
-        } else {
-            alert("Upload failed.");
-        }
-    } catch (error) {
-        console.error(error);
-        alert("Could not connect to server.");
-    }
+function setCategory(cat, btn) {
+    activeCategory = cat;
+    document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    loadWallpapers();
 }
 
 document.addEventListener("input", (e) => {

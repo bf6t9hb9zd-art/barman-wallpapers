@@ -1,40 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BARMAN Wallpapers</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARMAN Solutions — Wallpaper Platform</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-
-  <div class="logo-section">
-   
-
-    <div class="hero-content">
-      <h1>BARMAN Wallpapers</h1>
-      <p>Premium Wallpapers • Unlimited Downloads</p>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <div class="logo-icon"><span class="logo-b">B</span></div>
+    <div class="logo-text-wrap">
+      <span class="logo-main">BARMAN</span>
+      <span class="logo-sub">SOLUTIONS</span>
     </div>
-    <span class="verified-badge">✔ VERIFIED OWNER</span>
+    <div class="logo-badge">✔ VERIFIED</div>
   </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Gallery</a>
+    <a href="login.html" class="nav-link">Dashboard</a>
+  </div>
+</nav>
 
-  <p class="subtitle">Powered by BARMAN Solutions PTY LTD</p>
-
-  <input type="text" id="searchInput" placeholder="Search wallpapers...">
-</header>
-
-
-
-<section class="upload-box">
-  <input type="text" id="title" placeholder="Wallpaper title">
-  <input type="file" id="image">
-  <button onclick="uploadWallpaper()">Upload</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">BARMAN Solutions PTY LTD</p>
+    <h1 class="hero-title">
+      <span class="hero-line1">Premium</span>
+      <span class="hero-line2">Wallpapers</span>
+    </h1>
+    <p class="hero-desc">Curated collection. Free to download. Always growing.</p>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search wallpapers..." class="search-input">
+    </div>
+  </div>
 </section>
 
-<section class="gallery" id="gallery"></section>
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="categories-wrap">
+    <button class="cat-btn active" onclick="setCategory('All', this)">✦ All</button>
+    <button class="cat-btn" onclick="setCategory('Nature', this)">🌿 Nature</button>
+    <button class="cat-btn" onclick="setCategory('City', this)">🏙️ City</button>
+    <button class="cat-btn" onclick="setCategory('Space', this)">🌌 Space</button>
+    <button class="cat-btn" onclick="setCategory('Abstract', this)">🔮 Abstract</button>
+    <button class="cat-btn" onclick="setCategory('Dark', this)">🌑 Dark</button>
+    <button class="cat-btn" onclick="setCategory('Anime', this)">✨ Anime</button>
+    <button class="cat-btn" onclick="setCategory('Cars', this)">🚗 Cars</button>
+    <button class="cat-btn" onclick="setCategory('Technology', this)">💻 Tech</button>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><span id="total-count">0</span> wallpapers</div>
+  <div class="stat-divider">•</div>
+  <div class="stat-item">Free downloads</div>
+  <div class="stat-divider">•</div>
+  <div class="stat-item">By BARMAN Solutions</div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="gallery" id="gallery">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading wallpapers...</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">
+    <div class="logo-icon small"><span class="logo-b">B</span></div>
+    <div class="logo-text-wrap">
+      <span class="logo-main">BARMAN</span>
+      <span class="logo-sub">SOLUTIONS</span>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 BARMAN Solutions PTY LTD — All rights reserved</p>
+</footer>
 
 <script src="script.js"></script>
 </body>

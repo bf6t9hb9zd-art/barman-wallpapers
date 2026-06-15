@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>BARMAN Admin Login</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARMAN Solutions — Owner Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-    <h1>🔐 BARMAN OWNER LOGIN</h1>
-</header>
+<nav class="navbar">
+  <div class="nav-logo">
+    <div class="logo-icon"><span class="logo-b">B</span></div>
+    <div class="logo-text-wrap">
+      <span class="logo-main">BARMAN</span>
+      <span class="logo-sub">SOLUTIONS</span>
+    </div>
+    <div class="logo-badge">✔ VERIFIED</div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Gallery</a>
+  </div>
+</nav>
 
-<div style="text-align:center; margin-top:50px;">
-    <input id="username" placeholder="Username">
-    <br><br>
-    <input id="password" type="password" placeholder="Password">
-    <br><br>
-
-    <button id="loginBtn">Login</button>
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-logo-wrap">
+      <div class="logo-icon"><span class="logo-b">B</span></div>
+      <div class="logo-text-wrap">
+        <span class="logo-main">BARMAN</span>
+        <span class="logo-sub">SOLUTIONS</span>
+      </div>
+    </div>
+    <h2>Owner Login</h2>
+    <p>Access your admin dashboard</p>
+    <input type="text" id="username" placeholder="Username" autocomplete="off">
+    <input type="password" id="password" placeholder="Password">
+    <button class="login-btn" id="loginBtn">Login</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
 </div>
 
 <script>
 document.getElementById("loginBtn").addEventListener("click", async function () {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
+    const errEl = document.getElementById("login-error");
+    const btn = document.getElementById("loginBtn");
+
+    btn.textContent = "Logging in...";
+    btn.disabled = true;
 
     try {
         const res = await fetch("https://barman-wallpapers.onrender.com/login", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
         });
 
@@ -41,12 +63,19 @@ document.getElementById("loginBtn").addEventListener("click", async function () 
             localStorage.setItem("admin", "true");
             window.location.href = "dashboard.html";
         } else {
-            alert(data.message || "Wrong credentials");
+            errEl.textContent = data.message || "Wrong credentials";
+            btn.textContent = "Login";
+            btn.disabled = false;
         }
     } catch (err) {
-        alert("Server not responding");
-        console.error(err);
+        errEl.textContent = "Server waking up — try again in 30 seconds";
+        btn.textContent = "Login";
+        btn.disabled = false;
     }
+});
+
+document.addEventListener("keydown", e => {
+    if (e.key === "Enter") document.getElementById("loginBtn").click();
 });
 </script>
 

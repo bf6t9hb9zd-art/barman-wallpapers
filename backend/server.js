@@ -23,14 +23,21 @@ const upload = multer({ storage });
 
 const db = new Database(path.join(__dirname, "barman.db"));
 
+// ✅ category column added
 db.exec(`
     CREATE TABLE IF NOT EXISTS wallpapers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT,
+        category TEXT DEFAULT 'General',
         filename TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `);
+
+// ✅ Add category column if old DB doesn't have it
+try {
+    db.exec(`ALTER TABLE wallpapers ADD COLUMN category TEXT DEFAULT 'General'`);
+} catch (e) {}
 
 const ADMIN_USER = "barman";
 const ADMIN_PASS = "1234";
@@ -42,10 +49,13 @@ app.get("/wallpapers", (req, res) => {
     res.json(rows);
 });
 
+// ✅ Now saves category
 app.post("/upload", upload.single("image"), (req, res) => {
     if (!req.file) return res.status(400).json({ success: false, message: "No file uploaded" });
-    const { title } = req.body;
-    const result = db.prepare("INSERT INTO wallpapers (title, filename) VALUES (?, ?)").run(title, req.file.filename);
+    const { title, category } = req.body;
+    const result = db.prepare(
+        "INSERT INTO wallpapers (title, category, filename) VALUES (?, ?, ?)"
+    ).run(title, category || "General", req.file.filename);
     res.json({ success: true, id: result.lastInsertRowid });
 });
 
