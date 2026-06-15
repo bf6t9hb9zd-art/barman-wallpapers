@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-logo">
     <div class="logo-icon"><span class="logo-b">B</span></div>
@@ -16,15 +15,38 @@
       <span class="logo-main">BARMAN</span>
       <span class="logo-sub">SOLUTIONS</span>
     </div>
-    <div class="logo-badge">✔ VERIFIED</div>
+    <div class="logo-badge" data-i18n="login.badge">✔ VERIFIED</div>
+  </div>
+  <div class="nav-center">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" data-i18n-placeholder="gallery.search.placeholder">
+    </div>
   </div>
   <div class="nav-links">
-    <a href="index.html" class="nav-link active">Gallery</a>
-    <a href="login.html" class="nav-link">Dashboard</a>
+    <button class="nav-link" onclick="openUploadModal()" data-i18n="nav.upload">⬆️ Upload</button>
+    <div class="theme-toggle">
+      <button class="theme-btn" onclick="toggleTheme()" data-i18n-title="nav.theme.toggle">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+    <div class="language-selector">
+      <select id="languageSelect" onchange="changeLanguage(this.value)" class="lang-select">
+        <option value="en">English</option>
+        <option value="af">Afrikaans</option>
+        <option value="zh">中文</option>
+        <option value="tn">Setswana</option>
+        <option value="ts">Xitsonga</option>
+        <option value="ve">Tshivenda</option>
+        <option value="zu">isiZulu</option>
+      </select>
+    </div>
+    <button class="donate-nav-btn" onclick="openDonate()" data-i18n="nav.donate">💛 Donate</button>
+    <button class="help-nav-btn" onclick="openHelpCenter()" data-i18n-title="nav.help">❓</button>
+    <a href="login.html" class="nav-link" data-i18n="nav.dashboard">Dashboard</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-shapes">
@@ -33,54 +55,221 @@
     <div class="shape shape3"></div>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow">BARMAN Solutions PTY LTD</p>
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">BARMAN Solutions PTY LTD</p>
     <h1 class="hero-title">
-      <span class="hero-line1">Premium</span>
-      <span class="hero-line2">Wallpapers</span>
+      <span class="hero-line1" data-i18n="hero.line1">Premium</span>
+      <span class="hero-line2" data-i18n="hero.line2">Wallpapers</span>
     </h1>
-    <p class="hero-desc">Curated collection. Free to download. Always growing.</p>
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search wallpapers..." class="search-input">
+    <p class="hero-desc" data-i18n="hero.desc">Curated collection · Free to download · Always growing</p>
+  </div>
+</section>
+
+<section class="device-section">
+  <div class="device-wrap">
+    <button class="device-btn active" onclick="setDeviceType('All', this)" data-i18n="device.all">All Sizes</button>
+    <button class="device-btn" onclick="setDeviceType('PC', this)" data-i18n="device.pc">💻 PC</button>
+    <button class="device-btn" onclick="setDeviceType('Phone', this)" data-i18n="device.phone">📱 Phone</button>
+  </div>
+</section>
+
+<div class="main-layout">
+  <aside class="sidebar sidebar-left">
+    <div class="sidebar-section">
+      <div class="sidebar-title" data-i18n="sidebar.categories">📂 Categories</div>
+      <div class="sidebar-cats">
+        <button class="side-cat active" onclick="setCategory('All',this)" data-i18n="cat.all">✦ All</button>
+        <button class="side-cat" onclick="setCategory('Nature',this)" data-i18n="cat.nature">🌿 Nature</button>
+        <button class="side-cat" onclick="setCategory('City',this)" data-i18n="cat.city">🏙️ City</button>
+        <button class="side-cat" onclick="setCategory('Space',this)" data-i18n="cat.space">🌌 Space</button>
+        <button class="side-cat" onclick="setCategory('Abstract',this)" data-i18n="cat.abstract">🔮 Abstract</button>
+        <button class="side-cat" onclick="setCategory('Dark',this)" data-i18n="cat.dark">🌑 Dark</button>
+        <button class="side-cat" onclick="setCategory('Anime',this)" data-i18n="cat.anime">✨ Anime</button>
+        <button class="side-cat" onclick="setCategory('Cars',this)" data-i18n="cat.cars">🚗 Cars</button>
+        <button class="side-cat" onclick="setCategory('Technology',this)" data-i18n="cat.tech">💻 Tech</button>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- CATEGORIES -->
-<section class="categories-section">
-  <div class="categories-wrap">
-    <button class="cat-btn active" onclick="setCategory('All', this)">✦ All</button>
-    <button class="cat-btn" onclick="setCategory('Nature', this)">🌿 Nature</button>
-    <button class="cat-btn" onclick="setCategory('City', this)">🏙️ City</button>
-    <button class="cat-btn" onclick="setCategory('Space', this)">🌌 Space</button>
-    <button class="cat-btn" onclick="setCategory('Abstract', this)">🔮 Abstract</button>
-    <button class="cat-btn" onclick="setCategory('Dark', this)">🌑 Dark</button>
-    <button class="cat-btn" onclick="setCategory('Anime', this)">✨ Anime</button>
-    <button class="cat-btn" onclick="setCategory('Cars', this)">🚗 Cars</button>
-    <button class="cat-btn" onclick="setCategory('Technology', this)">💻 Tech</button>
-  </div>
-</section>
+    <div class="sidebar-section">
+      <div class="sidebar-title" data-i18n="sidebar.stats">📊 Stats</div>
+      <div class="sidebar-stat"><span id="total-count">0</span> <span data-i18n="sidebar.stat.wallpapers">wallpapers</span></div>
+      <div class="sidebar-stat" data-i18n="sidebar.stat.free">Free downloads</div>
+      <div class="sidebar-stat" data-i18n="sidebar.stat.updating">Always updating</div>
+    </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat-item"><span id="total-count">0</span> wallpapers</div>
-  <div class="stat-divider">•</div>
-  <div class="stat-item">Free downloads</div>
-  <div class="stat-divider">•</div>
-  <div class="stat-item">By BARMAN Solutions</div>
+    <div class="sidebar-section">
+      <div class="sidebar-title" data-i18n="sidebar.about">ℹ️ About</div>
+      <p class="sidebar-about" data-i18n="sidebar.about.text">BARMAN Solutions is a premium wallpaper platform. All wallpapers are hand-curated and free to download.</p>
+    </div>
+  </aside>
+
+  <main class="gallery-center">
+    <div class="gallery" id="gallery">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p data-i18n="gallery.loading">Loading wallpapers...</p>
+      </div>
+    </div>
+  </main>
+
+  <aside class="sidebar sidebar-right">
+    <div class="sidebar-section donate-box">
+      <div class="donate-icon">💛</div>
+      <div class="sidebar-title" data-i18n="sidebar.donate.title">Support Us</div>
+      <p class="donate-desc" data-i18n="sidebar.donate.desc">Help keep BARMAN Solutions free and growing. Every donation means more wallpapers!</p>
+      <button class="donate-btn-main" onclick="openDonate()" data-i18n="sidebar.donate.btn">Donate Now</button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title" data-i18n="sidebar.popular">🔥 Popular</div>
+      <div class="popular-list" id="popular-list">
+        <div class="pop-item" onclick="setCategory('Nature', document.querySelector('.side-cat:nth-child(2)'))" data-i18n="cat.nature">🌿 Nature</div>
+        <div class="pop-item" onclick="setCategory('Space', document.querySelector('.side-cat:nth-child(4)'))" data-i18n="cat.space">🌌 Space</div>
+        <div class="pop-item" onclick="setCategory('Dark', document.querySelector('.side-cat:nth-child(6)'))" data-i18n="cat.dark">🌑 Dark</div>
+        <div class="pop-item" onclick="setCategory('Anime', document.querySelector('.side-cat:nth-child(7)'))" data-i18n="cat.anime">✨ Anime</div>
+        <div class="pop-item" onclick="setCategory('Cars', document.querySelector('.side-cat:nth-child(8)'))" data-i18n="cat.cars">🚗 Cars</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title" data-i18n="sidebar.share">🔗 Share</div>
+      <p class="sidebar-about" style="margin-bottom:12px" data-i18n="sidebar.share.text">Share BARMAN Solutions with friends!</p>
+      <button class="share-btn" onclick="copyLink()" data-i18n="copy.success">📋 Copy Link</button>
+      <div id="copy-msg" style="font-size:12px;color:#D4AF37;margin-top:8px;min-height:18px"></div>
+    </div>
+  </aside>
 </div>
 
-<!-- GALLERY -->
-<section class="gallery-section">
-  <div class="gallery" id="gallery">
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>Loading wallpapers...</p>
+<!-- UPLOAD MODAL -->
+<div class="modal-bg" id="upload-modal" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeUploadModal()">✕</button>
+    <div class="donate-modal-icon">⬆️</div>
+    <h2 data-i18n="upload.title">Upload New Wallpaper</h2>
+    <p data-i18n="upload.desc">Share with the BARMAN community. Free forever.</p>
+
+    <div id="upload-preview-wrap" style="display:none;margin-bottom:14px">
+      <img id="upload-preview-img" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;border:1px solid rgba(212,175,55,0.3)">
+    </div>
+
+    <input type="text" id="up-title" class="donate-input" data-i18n-placeholder="upload.placeholder.title">
+    <select id="up-category" class="donate-input">
+      <option value="Nature" data-i18n="cat.nature">🌿 Nature</option>
+      <option value="City" data-i18n="cat.city">🏙️ City</option>
+      <option value="Space" data-i18n="cat.space">🌌 Space</option>
+      <option value="Abstract" data-i18n="cat.abstract">🔮 Abstract</option>
+      <option value="Dark" data-i18n="cat.dark">🌑 Dark</option>
+      <option value="Anime" data-i18n="cat.anime">✨ Anime</option>
+      <option value="Cars" data-i18n="cat.cars">🚗 Cars</option>
+      <option value="Technology" data-i18n="cat.tech">💻 Technology</option>
+    </select>
+    <select id="up-device" class="donate-input">
+      <option value="PC" data-i18n="device.pc">💻 PC (Landscape — wide screen)</option>
+      <option value="Phone" data-i18n="device.phone">📱 Phone (Portrait — vertical)</option>
+    </select>
+
+    <label class="file-label" style="width:100%;display:block;text-align:center;margin-bottom:12px">
+      <input type="file" id="up-image" accept="image/*" onchange="previewUploadImage()">
+      <span id="up-file-name" data-i18n="upload.placeholder.file">📁 Choose image...</span>
+    </label>
+
+    <button class="donate-confirm-btn" onclick="uploadFromModal()" id="up-btn" data-i18n="upload.btn">⬆️ Publish</button>
+    <div id="up-msg" style="font-size:13px;text-align:center;min-height:20px;margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-info">
+      <div class="lightbox-title" id="lightbox-title"></div>
+      <div class="lightbox-meta">
+        <span class="lightbox-cat" id="lightbox-cat"></span>
+        <span class="lightbox-device" id="lightbox-device"></span>
+      </div>
+      <div class="lightbox-actions">
+        <button class="lightbox-download" id="lightbox-download-btn" onclick="downloadLightbox()">
+          <span id="lightbox-dl-text" data-i18n="lightbox.download">⬇️ Download to my device</span>
+        </button>
+        <div class="lightbox-progress" id="lightbox-progress" style="display:none">
+          <div class="lightbox-progress-bar" id="lightbox-progress-bar"></div>
+        </div>
+        <div class="lightbox-status" id="lightbox-status"></div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
+<!-- DONATE MODAL -->
+<div class="modal-bg" id="donate-modal" style="display:none">
+  <div class="modal-box donate-modal-box">
+    <button class="modal-close" onclick="closeDonate()">✕</button>
+    <div class="donate-modal-icon">💛</div>
+    <h2 data-i18n="donate.title">Support BARMAN Solutions</h2>
+    <p data-i18n="donate.desc">Your donation keeps this platform free, ad-free, and growing with new wallpapers every week.</p>
+
+    <div class="donate-amounts">
+      <button class="amount-btn active" onclick="selectAmount(this,'5')">R5</button>
+      <button class="amount-btn" onclick="selectAmount(this,'10')">R10</button>
+      <button class="amount-btn" onclick="selectAmount(this,'20')">R20</button>
+      <button class="amount-btn" onclick="selectAmount(this,'50')">R50</button>
+      <button class="amount-btn custom-amount-btn" onclick="selectAmount(this,'custom')" data-i18n="donate.custom">Custom</button>
+    </div>
+
+    <div id="custom-amount-wrap" style="display:none;margin:12px 0">
+      <input type="number" id="custom-amount" class="donate-input" data-i18n-placeholder="donate.custom.placeholder">
+    </div>
+
+    <input type="text" id="donor-name" class="donate-input" data-i18n-placeholder="donate.name.placeholder">
+
+    <div class="donate-methods">
+      <div class="donate-method-title" data-i18n="donate.method">Choose payment method:</div>
+      <div class="donate-method-grid">
+        <button class="method-btn active" onclick="selectMethod(this,'payshap')">📱 PayShap</button>
+        <button class="method-btn" onclick="selectMethod(this,'capitec')">🏦 Capitec</button>
+        <button class="method-btn" onclick="selectMethod(this,'fnb')">🏦 FNB</button>
+        <button class="method-btn" onclick="selectMethod(this,'crypto')">🔗 Crypto</button>
+      </div>
+    </div>
+
+    <div id="method-info" class="method-info"></div>
+
+    <button class="donate-confirm-btn" onclick="confirmDonate()" data-i18n="donate.confirm">💛 Donate Now</button>
+    <p class="donate-note" data-i18n="donate.note">100% goes toward running BARMAN Solutions. Thank you! 🙏</p>
+  </div>
+</div>
+
+<!-- HELP MODAL -->
+<div id="helpModal" class="help-modal">
+  <div class="help-modal-content">
+    <span class="close-help" onclick="closeHelpCenter()">&times;</span>
+    <h2 data-i18n="help.title">Help Center</h2>
+    <div class="help-content">
+      <h3 data-i18n="help.contact">Contact Information</h3>
+      <div class="contact-item"><span class="contact-label" data-i18n="help.email">Email:</span> <a href="mailto:mashabacliff458@gmail.com">mashabacliff458@gmail.com</a></div>
+      <div class="contact-item"><span class="contact-label" data-i18n="help.phone">Phone:</span> <a href="tel:0603660391">0603660391</a></div>
+      <div class="contact-item"><span class="contact-label" data-i18n="help.whatsapp">WhatsApp:</span> <a href="https://wa.me/27832880154" target="_blank">0832880154</a></div>
+      <h3 data-i18n="help.faq">Frequently Asked Questions</h3>
+      <div class="faq-item"><h4 data-i18n="help.faq1.q">How do I download wallpapers?</h4><p data-i18n="help.faq1.a">Click any wallpaper to open a full preview, then press the Download button. The image will be saved to your Downloads folder.</p></div>
+      <div class="faq-item"><h4 data-i18n="help.faq2.q">Are the wallpapers free?</h4><p data-i18n="help.faq2.a">Yes! All wallpapers are completely free to download and use.</p></div>
+      <div class="faq-item"><h4 data-i18n="help.faq3.q">What is the difference between PC and Phone wallpapers?</h4><p data-i18n="help.faq3.a">PC wallpapers are optimized for larger screens with wider aspect ratios, while Phone wallpapers are designed for mobile devices with vertical orientations.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-cats">
+  <button class="cat-btn active" onclick="setCategory('All',this)" data-i18n="cat.all">✦ All</button>
+  <button class="cat-btn" onclick="setCategory('Nature',this)" data-i18n="cat.nature">🌿 Nature</button>
+  <button class="cat-btn" onclick="setCategory('City',this)" data-i18n="cat.city">🏙️ City</button>
+  <button class="cat-btn" onclick="setCategory('Space',this)" data-i18n="cat.space">🌌 Space</button>
+  <button class="cat-btn" onclick="setCategory('Abstract',this)" data-i18n="cat.abstract">🔮 Abstract</button>
+  <button class="cat-btn" onclick="setCategory('Dark',this)" data-i18n="cat.dark">🌑 Dark</button>
+  <button class="cat-btn" onclick="setCategory('Anime',this)" data-i18n="cat.anime">✨ Anime</button>
+  <button class="cat-btn" onclick="setCategory('Cars',this)" data-i18n="cat.cars">🚗 Cars</button>
+  <button class="cat-btn" onclick="setCategory('Technology',this)" data-i18n="cat.tech">💻 Tech</button>
+</div>
+
 <footer class="footer">
   <div class="footer-logo">
     <div class="logo-icon small"><span class="logo-b">B</span></div>
@@ -89,9 +278,11 @@
       <span class="logo-sub">SOLUTIONS</span>
     </div>
   </div>
-  <p class="footer-copy">© 2026 BARMAN Solutions PTY LTD — All rights reserved</p>
+  <p class="footer-copy" data-i18n="footer.copy">© 2026 BARMAN Solutions PTY LTD — All rights reserved</p>
+  <button class="footer-donate" onclick="openDonate()" data-i18n="footer.support">💛 Support Us</button>
 </footer>
 
+<script src="i18n.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

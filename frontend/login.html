@@ -15,10 +15,10 @@
       <span class="logo-main">BARMAN</span>
       <span class="logo-sub">SOLUTIONS</span>
     </div>
-    <div class="logo-badge">✔ VERIFIED</div>
+    <div class="logo-badge" data-i18n="login.badge">✔ VERIFIED</div>
   </div>
   <div class="nav-links">
-    <a href="index.html" class="nav-link">Gallery</a>
+    <a href="index.html" class="nav-link" data-i18n="nav.gallery">Gallery</a>
   </div>
 </nav>
 
@@ -31,23 +31,28 @@
         <span class="logo-sub">SOLUTIONS</span>
       </div>
     </div>
-    <h2>Owner Login</h2>
-    <p>Access your admin dashboard</p>
-    <input type="text" id="username" placeholder="Username" autocomplete="off">
-    <input type="password" id="password" placeholder="Password">
-    <button class="login-btn" id="loginBtn">Login</button>
+    <h2 data-i18n="login.title">Owner Login</h2>
+    <p data-i18n="login.desc">Access your admin dashboard</p>
+    <input type="text" id="username" data-i18n-placeholder="login.username" autocomplete="off">
+    <input type="password" id="password" data-i18n-placeholder="login.password">
+    <button class="login-btn" id="loginBtn" data-i18n="login.btn">Login</button>
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
 
+<script src="i18n.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    applyTranslations();
+});
+
 document.getElementById("loginBtn").addEventListener("click", async function () {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
     const errEl = document.getElementById("login-error");
     const btn = document.getElementById("loginBtn");
 
-    btn.textContent = "Logging in...";
+    btn.textContent = t('login.btn.loading');
     btn.disabled = true;
 
     try {
@@ -63,13 +68,13 @@ document.getElementById("loginBtn").addEventListener("click", async function () 
             localStorage.setItem("admin", "true");
             window.location.href = "dashboard.html";
         } else {
-            errEl.textContent = data.message || "Wrong credentials";
-            btn.textContent = "Login";
+            errEl.textContent = data.message || t('login.error.creds');
+            btn.textContent = t('login.btn');
             btn.disabled = false;
         }
     } catch (err) {
-        errEl.textContent = "Server waking up — try again in 30 seconds";
-        btn.textContent = "Login";
+        errEl.textContent = t('login.error.server');
+        btn.textContent = t('login.btn');
         btn.disabled = false;
     }
 });
