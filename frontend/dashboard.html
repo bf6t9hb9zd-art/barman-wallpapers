@@ -24,18 +24,16 @@
 </nav>
 
 <div class="dashboard-page">
-
   <div class="dash-title">🛡️ Owner Dashboard</div>
 
-  <!-- STATS -->
   <div class="dash-stats">
     <div class="dash-stat">
       <div class="dash-stat-val" id="stat-total">0</div>
       <div class="dash-stat-label">Total Wallpapers</div>
     </div>
     <div class="dash-stat">
-      <div class="dash-stat-val">BARMAN</div>
-      <div class="dash-stat-label">Owner</div>
+      <div class="dash-stat-val" id="current-admin" style="font-size: 1.2em;">Loading...</div>
+      <div class="dash-stat-label">Active Admin</div>
     </div>
     <div class="dash-stat">
       <div class="dash-stat-val">Free</div>
@@ -43,31 +41,57 @@
     </div>
   </div>
 
-  <!-- UPLOAD -->
   <div class="upload-card">
     <h3>⬆️ Upload New Wallpaper</h3>
     <div class="upload-fields">
       <input type="text" id="title" placeholder="Wallpaper title">
+
       <select id="category">
-        <option value="Nature">🌿 Nature</option>
-        <option value="City">🏙️ City</option>
-        <option value="Space">🌌 Space</option>
-        <option value="Abstract">🔮 Abstract</option>
-        <option value="Dark">🌑 Dark</option>
-        <option value="Anime">✨ Anime</option>
+        <option value="Abstract">🌀 Abstract</option>
+        <option value="Aesthetic">🌻 Aesthetic</option>
+        <option value="Animals">🐶 Animals</option>
+        <option value="Anime">💥 Anime</option>
+        <option value="Art">🎨 Art</option>
+        <option value="Bollywood">🤩 Bollywood</option>
         <option value="Cars">🚗 Cars</option>
-        <option value="Technology">💻 Technology</option>
+        <option value="Celebrities">👥 Celebrities</option>
+        <option value="City">🏙️ City</option>
+        <option value="Colors">🌈 Colors</option>
+        <option value="Comics">💭 Comics</option>
+        <option value="Devices">📱 Devices</option>
+        <option value="Fantasy">🧚 Fantasy</option>
+        <option value="Flowers">🌷 Flowers</option>
+        <option value="Games">🎮 Games</option>
+        <option value="Holidays">🎃 Holidays</option>
+        <option value="Horror">🧟 Horror</option>
+        <option value="Love">❤️ Love</option>
+        <option value="Movies">🎬 Movies</option>
+        <option value="Music">🎤 Music</option>
+        <option value="Nature">🌳 Nature</option>
+        <option value="Other">➕ Other</option>
+        <option value="Resolutions">↔️ Resolutions</option>
+        <option value="Space">🚀 Space</option>
+        <option value="Sport">🏀 Sport</option>
+        <option value="Textures">📜 Textures</option>
+        <option value="Travel">✈️ Travel</option>
+        <option value="TV Shows">📺 TV Shows</option>
       </select>
+
+      <select id="device">
+        <option value="PC">💻 PC</option>
+        <option value="Phone">📱 Phone</option>
+      </select>
+
       <label class="file-label">
         <input type="file" id="image" accept="image/*" onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'Choose image...'">
         <span id="file-name">Choose image...</span>
       </label>
+
       <button class="upload-btn" onclick="uploadWallpaper()">⬆️ Publish</button>
     </div>
     <div id="upload-msg" style="margin-top:12px;font-size:13px;color:#888"></div>
   </div>
 
-  <!-- TABLE -->
   <div class="dash-table-wrap">
     <table class="dash-table">
       <thead>
@@ -75,16 +99,16 @@
           <th>Preview</th>
           <th>Title</th>
           <th>Category</th>
-          <th>Uploaded</th>
+          <th>Device</th>
+          <th>Date</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody id="dash-tbody">
-        <tr><td colspan="5" style="text-align:center;padding:30px;color:#555">Loading...</td></tr>
+        <tr><td colspan="6" style="text-align:center;padding:30px;color:#555">Loading...</td></tr>
       </tbody>
     </table>
   </div>
-
 </div>
 
 <script src="dashboard.js"></script>

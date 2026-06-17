@@ -41,13 +41,19 @@
 </div>
 
 <script>
-document.getElementById("loginBtn").addEventListener("click", async function () {
+async function performLogin() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
     const errEl = document.getElementById("login-error");
     const btn = document.getElementById("loginBtn");
 
-    btn.textContent = "Logging in...";
+    if (!username || !password) {
+        errEl.textContent = "Please enter both username and password.";
+        errEl.style.color = "#ff4d4d";
+        return;
+    }
+
+    btn.textContent = "Authenticating...";
     btn.disabled = true;
 
     try {
@@ -61,21 +67,24 @@ document.getElementById("loginBtn").addEventListener("click", async function () 
 
         if (data.success) {
             localStorage.setItem("admin", "true");
+            localStorage.setItem("adminName", username.toUpperCase());
             window.location.href = "dashboard.html";
         } else {
-            errEl.textContent = data.message || "Wrong credentials";
-            btn.textContent = "Login";
-            btn.disabled = false;
+            throw new Error(data.message || "Invalid credentials");
         }
     } catch (err) {
-        errEl.textContent = "Server waking up — try again in 30 seconds";
+        errEl.textContent = err.message === "Failed to fetch" 
+            ? "Server is waking up. Please wait 30s and try again." 
+            : err.message;
         btn.textContent = "Login";
         btn.disabled = false;
     }
-});
+}
+
+document.getElementById("loginBtn").addEventListener("click", performLogin);
 
 document.addEventListener("keydown", e => {
-    if (e.key === "Enter") document.getElementById("loginBtn").click();
+    if (e.key === "Enter") performLogin();
 });
 </script>
 

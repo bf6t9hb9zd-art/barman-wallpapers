@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,102 +8,146 @@
 </head>
 <body>
 
+<!-- MOBILE SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
+<!-- MOBILE SIDEBAR DRAWER -->
+<div class="mobile-sidebar" id="mobile-sidebar">
+  <div class="mobile-sidebar-header">
+    <div class="nav-logo">
+      <div class="logo-icon"><span class="logo-b">B</span></div>
+      <div class="logo-text-wrap">
+        <span class="logo-main">BARMAN</span>
+        <span class="logo-sub">SOLUTIONS</span>
+      </div>
+    </div>
+    <button class="sidebar-close" onclick="closeMobileSidebar()">✕</button>
+  </div>
+  <div class="mobile-sidebar-body">
+    <div class="sidebar-section-title" data-i18n="categories">📂 Categories</div>
+    <button class="side-cat active" onclick="setCategory('All',this);closeMobileSidebar()" data-i18n="catall">✦ All</button>
+    <button class="side-cat" onclick="setCategory('Abstract',this);closeMobileSidebar()">🌀 Abstract</button>
+    <button class="side-cat" onclick="setCategory('Aesthetic',this);closeMobileSidebar()">🌻 Aesthetic</button>
+    <button class="side-cat" onclick="setCategory('Animals',this);closeMobileSidebar()">🐶 Animals</button>
+    <button class="side-cat" onclick="setCategory('Anime',this);closeMobileSidebar()">💥 Anime</button>
+    <button class="side-cat" onclick="setCategory('Art',this);closeMobileSidebar()">🎨 Art</button>
+    <button class="side-cat" onclick="setCategory('Cars',this);closeMobileSidebar()">🚗 Cars</button>
+    <button class="side-cat" onclick="setCategory('City',this);closeMobileSidebar()">🏙️ City</button>
+    <button class="side-cat" onclick="setCategory('Fantasy',this);closeMobileSidebar()">🧚 Fantasy</button>
+    <button class="side-cat" onclick="setCategory('Flowers',this);closeMobileSidebar()">🌷 Flowers</button>
+    <button class="side-cat" onclick="setCategory('Games',this);closeMobileSidebar()">🎮 Games</button>
+    <button class="side-cat" onclick="setCategory('Love',this);closeMobileSidebar()">❤️ Love</button>
+    <button class="side-cat" onclick="setCategory('Movies',this);closeMobileSidebar()">🎬 Movies</button>
+    <button class="side-cat" onclick="setCategory('Music',this);closeMobileSidebar()">🎤 Music</button>
+    <button class="side-cat" onclick="setCategory('Nature',this);closeMobileSidebar()">🌳 Nature</button>
+    <button class="side-cat" onclick="setCategory('Space',this);closeMobileSidebar()">🚀 Space</button>
+    <button class="side-cat" onclick="setCategory('Sport',this);closeMobileSidebar()">🏀 Sport</button>
+    <button class="side-cat" onclick="setCategory('Travel',this);closeMobileSidebar()">✈️ Travel</button>
+    <button class="side-cat" onclick="setCategory('Other',this);closeMobileSidebar()">➕ Other</button>
+    <div class="sidebar-section-title" style="margin-top:20px" data-i18n="devicefilter">📱 Device</div>
+    <button class="side-dev active" onclick="setDevice('All',this);closeMobileSidebar()" data-i18n="devall">All Devices</button>
+    <button class="side-dev" onclick="setDevice('PC',this);closeMobileSidebar()">🖥️ PC</button>
+    <button class="side-dev" onclick="setDevice('Phone',this);closeMobileSidebar()">📱 Phone</button>
+  </div>
+</div>
+
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="nav-logo">
-    <div class="logo-icon"><span class="logo-b">B</span></div>
-    <div class="logo-text-wrap">
-      <span class="logo-main">BARMAN</span>
-      <span class="logo-sub">SOLUTIONS</span>
+  <div class="navbar-left">
+    <button class="hamburger" onclick="openMobileSidebar()" title="Menu">☰</button>
+    <div class="nav-logo">
+      <div class="logo-icon"><span class="logo-b">B</span></div>
+      <div class="logo-text-wrap">
+        <span class="logo-main">BARMAN</span>
+        <span class="logo-sub">SOLUTIONS</span>
+      </div>
+      <div class="logo-badge">✔ VERIFIED</div>
     </div>
-    <div class="logo-badge">✔ VERIFIED</div>
   </div>
   <div class="nav-center">
     <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="Search wallpapers..." class="search-input">
+      <span>🔍</span>
+      <input type="text" id="searchInput" class="search-input" data-i18n-ph="search" placeholder="Search wallpapers...">
     </div>
   </div>
   <div class="nav-links">
-    <div class="theme-toggle">
-      <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <span id="theme-icon">🌙</span>
-      </button>
+    <div class="lang-wrap">
+      <button class="lang-btn" id="lang-btn" onclick="toggleLangMenu()">🌐 EN</button>
+      <div class="lang-menu" id="lang-menu">
+        <div class="lang-item" onclick="setLang('en')">🇿🇦 English</div>
+        <div class="lang-item" onclick="setLang('af')">🇿🇦 Afrikaans</div>
+        <div class="lang-item" onclick="setLang('zh')">🇨🇳 中文</div>
+        <div class="lang-item" onclick="setLang('tn')">🇿🇦 Setswana</div>
+        <div class="lang-item" onclick="setLang('ts')">🇿🇦 Tsonga</div>
+        <div class="lang-item" onclick="setLang('ve')">🇿🇦 Tshivenḓa</div>
+        <div class="lang-item" onclick="setLang('zu')">🇿🇦 isiZulu</div>
+      </div>
     </div>
-    <div class="language-selector">
-      <select id="languageSelect" onchange="changeLanguage(this.value)" class="lang-select">
-        <option value="en">English</option>
-        <option value="af">Afrikaans</option>
-        <option value="zh">中文</option>
-        <option value="tn">Setswana</option>
-        <option value="ts">Xitsonga</option>
-        <option value="ve">Tshivenda</option>
-        <option value="zu">isiZulu</option>
-      </select>
-    </div>
-    <button class="donate-nav-btn" onclick="openDonate()" data-en="💛 Donate" data-af="💛 Doneer" data-zh="💛 捐赠" data-tn="💛 Kaonela" data-ts="💛 Kopa" data-ve="💛 Ipa" data-zu="💛 Nkosela">💛 Donate</button>
-    <button class="help-nav-btn" onclick="openHelpCenter()" title="Help & Support">❓</button>
-    <a href="login.html" class="nav-link">Dashboard</a>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+    <button class="donate-nav-btn" onclick="openDonate()" data-i18n="donate">💛 Donate</button>
+    <button class="help-nav-btn" onclick="openHelp()" data-i18n="help">❓ Help</button>
+    <a href="login.html" class="nav-link" data-i18n="dashboard">Dashboard</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="bysg-watermark" id="bysg-watermark">BYSG</div>
   <div class="hero-shapes">
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
     <div class="shape shape3"></div>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow" data-en="BARMAN Solutions PTY LTD" data-af="BARMAN Solutions PTY LTD" data-zh="BARMAN Solutions PTY LTD" data-tn="BARMAN Solutions PTY LTD" data-ts="BARMAN Solutions PTY LTD" data-ve="BARMAN Solutions PTY LTD" data-zu="BARMAN Solutions PTY LTD">BARMAN Solutions PTY LTD</p>
+    <p class="hero-eyebrow">BARMAN Solutions PTY LTD</p>
     <h1 class="hero-title">
-      <span class="hero-line1" data-en="Premium" data-af="Premium" data-zh="高级" data-tn="Premium" data-ts="Premium" data-ve="Premium" data-zu="Premium">Premium</span>
-      <span class="hero-line2" data-en="Wallpapers" data-af="Agtergronde" data-zh="壁纸" data-tn="Wallpapers" data-ts="Wallpapers" data-ve="Wallpapers" data-zu="Izithombe">Wallpapers</span>
+      <span class="hero-line1" data-i18n="hero1">Premium</span>
+      <span class="hero-line2" data-i18n="hero2">Wallpapers</span>
     </h1>
-    <p class="hero-desc" data-en="Curated collection · Free to download · Always growing" data-af="Gekureerde versameling · Gratis om af te laai · Altyd groeiend" data-zh="精选收藏 · 免费下载 · 不断增长" data-tn="Koleksiyong e boitshwaro · Mahala go laelopele · Le tlile ka dinako" data-ts="Nkota lowikiwile · Ku sirisa ndzawu · Akuneni ku kondzisa">Curated collection · Free to download · Always growing</p>
+    <p class="hero-desc" data-i18n="hero3">Curated collection · Free to download · Always growing</p>
   </div>
 </section>
 
-<!-- DEVICE TYPE SELECTOR -->
-<section class="device-section">
-  <div class="device-wrap">
-    <button class="device-btn active" onclick="setDeviceType('All', this)" data-en="All Sizes" data-af="Alle Groottes" data-zh="所有尺寸" data-tn="Bogare Ba Leng" data-ts="Milenge Yoofara" data-ve="Mbuelo ya Tshipida" data-zu="Zonke Izilinganiso">All Sizes</button>
-    <button class="device-btn" onclick="setDeviceType('PC', this)" data-en="💻 PC" data-af="💻 PC" data-zh="💻 电脑" data-tn="💻 Khompiuti" data-ts="💻 Khomphiwutara" data-ve="💻 Khomiphiyutha" data-zu="💻 IKhompyutha">💻 PC</button>
-    <button class="device-btn" onclick="setDeviceType('Phone', this)" data-en="📱 Phone" data-af="📱 Foon" data-zh="📱 手机" data-tn="📱 Selulagadi" data-ts="📱 Foni" data-ve="📱 Foni" data-zu="📱 Umakhalekele">📱 Phone</button>
-  </div>
-</section>
+<!-- DEVICE TABS -->
+<div class="device-tabs-bar">
+  <button class="device-tab active" onclick="setDevice('All',this)" data-i18n="devall">🖼️ All Devices</button>
+  <button class="device-tab" onclick="setDevice('PC',this)" data-i18n="pcwall">🖥️ PC Wallpapers</button>
+  <button class="device-tab" onclick="setDevice('Phone',this)" data-i18n="phonewall">📱 Phone Wallpapers</button>
+</div>
 
-<!-- MAIN LAYOUT: LEFT SIDEBAR + GALLERY + RIGHT SIDEBAR -->
+<!-- MAIN LAYOUT -->
 <div class="main-layout">
 
-  <!-- LEFT SIDEBAR: CATEGORIES -->
+  <!-- LEFT SIDEBAR (desktop) -->
   <aside class="sidebar sidebar-left">
-    <div class="sidebar-section">
-      <div class="sidebar-title" data-en="📂 Categories" data-af="📂 Kategorieë" data-zh="📂 分类" data-tn="📂 Lekgoro" data-ts="📂 Sekgoko" data-ve="📂 Sekgoko" data-zu="📂 Izigaba">📂 Categories</div>
-      <div class="sidebar-cats">
-        <button class="side-cat active" onclick="setCategory('All',this)">✦ All</button>
-        <button class="side-cat" onclick="setCategory('Nature',this)">🌿 Nature</button>
-        <button class="side-cat" onclick="setCategory('City',this)">🏙️ City</button>
-        <button class="side-cat" onclick="setCategory('Space',this)">🌌 Space</button>
-        <button class="side-cat" onclick="setCategory('Abstract',this)">🔮 Abstract</button>
-        <button class="side-cat" onclick="setCategory('Dark',this)">🌑 Dark</button>
-        <button class="side-cat" onclick="setCategory('Anime',this)">✨ Anime</button>
-        <button class="side-cat" onclick="setCategory('Cars',this)">🚗 Cars</button>
-        <button class="side-cat" onclick="setCategory('Technology',this)">💻 Tech</button>
-      </div>
+    <div class="sidebar-card">
+      <div class="sidebar-section-title" data-i18n="categories">📂 Categories</div>
+      <button class="side-cat active" onclick="setCategory('All',this)" data-i18n="catall">✦ All</button>
+      <button class="side-cat" onclick="setCategory('Abstract',this)">🌀 Abstract</button>
+      <button class="side-cat" onclick="setCategory('Aesthetic',this)">🌻 Aesthetic</button>
+      <button class="side-cat" onclick="setCategory('Animals',this)">🐶 Animals</button>
+      <button class="side-cat" onclick="setCategory('Anime',this)">💥 Anime</button>
+      <button class="side-cat" onclick="setCategory('Art',this)">🎨 Art</button>
+      <button class="side-cat" onclick="setCategory('Cars',this)">🚗 Cars</button>
+      <button class="side-cat" onclick="setCategory('City',this)">🏙️ City</button>
+      <button class="side-cat" onclick="setCategory('Fantasy',this)">🧚 Fantasy</button>
+      <button class="side-cat" onclick="setCategory('Flowers',this)">🌷 Flowers</button>
+      <button class="side-cat" onclick="setCategory('Games',this)">🎮 Games</button>
+      <button class="side-cat" onclick="setCategory('Love',this)">❤️ Love</button>
+      <button class="side-cat" onclick="setCategory('Movies',this)">🎬 Movies</button>
+      <button class="side-cat" onclick="setCategory('Music',this)">🎤 Music</button>
+      <button class="side-cat" onclick="setCategory('Nature',this)">🌳 Nature</button>
+      <button class="side-cat" onclick="setCategory('Space',this)">🚀 Space</button>
+      <button class="side-cat" onclick="setCategory('Sport',this)">🏀 Sport</button>
+      <button class="side-cat" onclick="setCategory('Travel',this)">✈️ Travel</button>
+      <button class="side-cat" onclick="setCategory('Other',this)">➕ Other</button>
     </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-title" data-en="📊 Stats" data-af="📊 Statistieke" data-zh="📊 统计" data-tn="📊 Palo" data-ts="📊 Mpikisano" data-ve="📊 Mpikisano" data-zu="📊 Izibalo">📊 Stats</div>
-      <div class="sidebar-stat"><span id="total-count">0</span> <span data-en="wallpapers" data-af="agtergronde" data-zh="壁纸" data-tn="wallpapers" data-ts="wallpapers" data-ve="wallpapers" data-zu="izithombe">wallpapers</span></div>
-      <div class="sidebar-stat" data-en="Free downloads" data-af="Gratis afladings" data-zh="免费下载" data-tn="Mahala go laela" data-ts="Mahala ya siralanyi" data-ve="Mahala fhasi" data-zu="Ukudonsela Mahala">Free downloads</div>
-      <div class="sidebar-stat" data-en="Always updating" data-af="Altyd opdateer" data-zh="始终更新" data-tn="Lebaka la Nako Lengwe Lengwe" data-ts="Lebaka la Nako Lengwe Lengwe" data-ve="Lebaka la Nako Lengwe Lengwe" data-zu="Lokuhlala Kuxubeka">Always updating</div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-title" data-en="ℹ️ About" data-af="ℹ️ Oor" data-zh="ℹ️ 关于" data-tn="ℹ️ Malebana Le" data-ts="ℹ️ Malebana Le" data-ve="ℹ️ Malebana Le" data-zu="ℹ️ Malebana">ℹ️ About</div>
-      <p class="sidebar-about" data-en="BARMAN Solutions is a premium wallpaper platform. All wallpapers are hand-curated and free to download." data-af="BARMAN Solutions is 'n premium wallpaper-platform. Alle agtergronde is handgekureerd en gratis om af te laai." data-zh="BARMAN Solutions 是一个高级壁纸平台。所有壁纸都是手工精选的，可免费下载。" data-tn="BARMAN Solutions ke platform ya premium wallpaper. Wallpapers ka Lekgoro Le Le Khanetswe Ke Letswele Le Go Sa Letshwanyega." data-ts="BARMAN Solutions ke platform ya premium wallpaper. Wallpapers ka Lekgoro Le Le Khanetswe Ke Letswele Le Go Sa Letshwanyega." data-ve="BARMAN Solutions ke platform ya premium wallpaper. Wallpapers ka Lekgoro Le Le Khanetswe Ke Letswele Le Go Sa Letshwanyega." data-zu="I-BARMAN Solutions yindawo yama-wallpaper ephakeme. Zonke izithombe zinqunywe ngesandla futhi ziyahala.">BARMAN Solutions is a premium wallpaper platform. All wallpapers are hand-curated and free to download.</p>
+    <div class="sidebar-card">
+      <div class="sidebar-section-title" data-i18n="stats">📊 Stats</div>
+      <div class="sidebar-stat"><span id="total-count">0</span> <span data-i18n="wallpapers">wallpapers</span></div>
+      <div class="sidebar-stat" data-i18n="freedl">Free downloads</div>
+      <div class="sidebar-stat" data-i18n="alwaysup">Always updating</div>
     </div>
   </aside>
 
@@ -112,140 +156,110 @@
     <div class="gallery" id="gallery">
       <div class="loading-state">
         <div class="spinner"></div>
-        <p data-en="Loading wallpapers..." data-af="Agtergronde word gelaai..." data-zh="正在加载壁纸..." data-tn="Go laelapele wallpapers..." data-ts="Go laelapele wallpapers..." data-ve="Go laelapele wallpapers..." data-zu="Ikulodenisisa i-wallpapers...">Loading wallpapers...</p>
+        <p data-i18n="loading">Loading wallpapers...</p>
       </div>
     </div>
   </main>
 
   <!-- RIGHT SIDEBAR -->
   <aside class="sidebar sidebar-right">
-
-    <!-- DONATE BOX -->
-    <div class="sidebar-section donate-box">
+    <div class="sidebar-card donate-box">
       <div class="donate-icon">💛</div>
-      <div class="sidebar-title" data-en="Support Us" data-af="Steun Ons" data-zh="支持我们" data-tn="Thusa Rona" data-ts="Sizela Ina" data-ve="Thusa Ina" data-zu="Sinisekele">Support Us</div>
-      <p class="donate-desc" data-en="Help keep BARMAN Solutions free and growing. Every donation means more wallpapers!" data-af="Help hou BARMAN Solutions gratis en groei. Elke donasie beteken meer agtergronde!" data-zh="帮助保持 BARMAN Solutions 免费和增长。每一次捐赠都意味着更多壁纸！" data-tn="Thusa Go Boloka BARMAN Solutions E Mahala Le Go Godima. Kaonelo Lengwe Lengwe Go Bolela Wallpapers E Lengwe!" data-ts="Sizela Go Boloka BARMAN Solutions E Mahala Le Go Godima. Kopa Lengwe Lengwe Go Bolela Wallpapers E Lengwe!" data-ve="Thusa Go Boloka BARMAN Solutions E Mahala Le Go Godima. Ipa Lengwe Lengwe Go Bolela Wallpapers E Lengwe!" data-zu="Sinisekele ukugcina i-BARMAN Solutions yamahhala nokukhuphela. Inkonzo ngayinye isho wallpapers eningaki!">Help keep BARMAN Solutions free and growing. Every donation means more wallpapers!</p>
-      <button class="donate-btn-main" onclick="openDonate()" data-en="Donate Now" data-af="Doneer Nou" data-zh="立即捐赠" data-tn="Kaonela Jaanong" data-ts="Kopa Jaanong" data-ve="Ipa Jaanong" data-zu="Nkosela Manje">Donate Now</button>
+      <div class="sidebar-section-title" data-i18n="supportus">Support Us</div>
+      <p class="donate-desc" data-i18n="donatedesc">Keep BARMAN Solutions free!</p>
+      <button class="donate-btn-main" onclick="openDonate()" data-i18n="donatenow">Donate Now</button>
     </div>
-
-    <!-- TOP CATEGORIES -->
-    <div class="sidebar-section">
-      <div class="sidebar-title" data-en="🔥 Popular" data-af="🔥 Gewild" data-zh="🔥 受欢迎" data-tn="🔥 Go Ratwa" data-ts="🔥 Go Ratwa" data-ve="🔥 Go Ratwa" data-zu="🔥 Okuthandwa">🔥 Popular</div>
-      <div class="popular-list" id="popular-list">
-        <div class="pop-item" onclick="setCategory('Nature', document.querySelector('.side-cat:nth-child(2)'))">🌿 Nature</div>
-        <div class="pop-item" onclick="setCategory('Space', document.querySelector('.side-cat:nth-child(4)'))">🌌 Space</div>
-        <div class="pop-item" onclick="setCategory('Dark', document.querySelector('.side-cat:nth-child(6)'))">🌑 Dark</div>
-        <div class="pop-item" onclick="setCategory('Anime', document.querySelector('.side-cat:nth-child(7)'))">✨ Anime</div>
-        <div class="pop-item" onclick="setCategory('Cars', document.querySelector('.side-cat:nth-child(8)'))">🚗 Cars</div>
-      </div>
+    <div class="sidebar-card">
+      <div class="sidebar-section-title" data-i18n="popular">🔥 Popular</div>
+      <div class="pop-item" onclick="setCategory('Nature',null)">🌳 Nature</div>
+      <div class="pop-item" onclick="setCategory('Space',null)">🚀 Space</div>
+      <div class="pop-item" onclick="setCategory('Anime',null)">💥 Anime</div>
+      <div class="pop-item" onclick="setCategory('Cars',null)">🚗 Cars</div>
+      <div class="pop-item" onclick="setCategory('Flowers',null)">🌷 Flowers</div>
     </div>
-
-    <!-- SHARE -->
-    <div class="sidebar-section">
-      <div class="sidebar-title" data-en="🔗 Share" data-af="🔗 Deel" data-zh="🔗 分享" data-tn="🔗 Go Aroganya" data-ts="🔗 Go Aroganya" data-ve="🔗 Go Aroganya" data-zu="🔗 Yabelana">🔗 Share</div>
-      <p class="sidebar-about" style="margin-bottom:12px" data-en="Share BARMAN Solutions with friends!" data-af="Deel BARMAN Solutions met vriende!" data-zh="与朋友分享 BARMAN Solutions！" data-tn="Go Aroganya BARMAN Solutions Go Tsala!" data-ts="Go Aroganya BARMAN Solutions Go Tsala!" data-ve="Go Aroganya BARMAN Solutions Go Tsala!" data-zu="Yabelana BARMAN Solutions Nabangani!">Share BARMAN Solutions with friends!</p>
-      <button class="share-btn" onclick="copyLink()" data-en="📋 Copy Link" data-af="📋 Kopieer Skakel" data-zh="📋 复制链接" data-tn="📋 Ong Go Kopiya" data-ts="📋 Ong Go Kopiya" data-ve="📋 Ong Go Kopiya" data-zu="📋 Khusha Ilinki">📋 Copy Link</button>
-      <div id="copy-msg" style="font-size:12px;color:#D4AF37;margin-top:8px;min-height:18px"></div>
+    <div class="sidebar-card">
+      <div class="sidebar-section-title" data-i18n="share">🔗 Share</div>
+      <button class="share-btn" onclick="copyLink()" data-i18n="copylink">📋 Copy Link</button>
+      <div id="copy-msg"></div>
     </div>
-
+    <div class="sidebar-card">
+      <div class="sidebar-section-title">❓ <span data-i18n="needhelp">Need Help?</span></div>
+      <button class="share-btn" onclick="openHelp()" data-i18n="helpcenter">🆘 Help Center</button>
+    </div>
   </aside>
-
 </div>
 
 <!-- DONATE MODAL -->
-<div class="modal-bg" id="donate-modal" style="display:none">
-  <div class="modal-box donate-modal-box">
+<div class="modal-bg" id="donate-modal">
+  <div class="modal-box">
     <button class="modal-close" onclick="closeDonate()">✕</button>
     <div class="donate-modal-icon">💛</div>
-    <h2 data-en="Support BARMAN Solutions" data-af="Steun BARMAN Solutions" data-zh="支持 BARMAN Solutions" data-tn="Thusa BARMAN Solutions" data-ts="Sizela BARMAN Solutions" data-ve="Thusa BARMAN Solutions" data-zu="Sinisekele I-BARMAN Solutions">Support BARMAN Solutions</h2>
-    <p data-en="Your donation keeps this platform free, ad-free, and growing with new wallpapers every week." data-af="Jou donasie hou hierdie platform gratis, adreklame-vrij en groei met nuwe agtergronde elke week." data-zh="您的捐赠使这个平台保持免费，无广告，并每周增长新壁纸。" data-tn="Kaonelo Ya Gago Go Boloka Platform Eno E Mahala, E Mahala Go Go Se Tlisetswe, Le Go Godima Go Le Wallpapers E Matsha Lengwe Lengwe Le Lengwe." data-ts="Kopa Ya Gago Go Boloka Platform Eno E Mahala, E Mahala Go Go Se Tlisetswe, Le Go Godima Go Le Wallpapers E Matsha Lengwe Lengwe Le Lengwe." data-ve="Ipa Ya Gago Go Boloka Platform Eno E Mahala, E Mahala Go Go Se Tlisetswe, Le Go Godima Go Le Wallpapers E Matsha Lengwe Lengwe Le Lengwe." data-zu="Inkonzo yakho iyagcina le ndawo yamahhala, ayinangumthumela, nokukhuphela ngezithombe ezintsha ngosuku ngosuku lonke.">Your donation keeps this platform free, ad-free, and growing with new wallpapers every week.</p>
-
+    <h2 data-i18n="supportus">Support BARMAN Solutions</h2>
+    <p data-i18n="donatedesc2">Keep this platform free, ad-free and growing.</p>
     <div class="donate-amounts">
-      <button class="amount-btn active" onclick="selectAmount(this,'5')">R5</button>
-      <button class="amount-btn" onclick="selectAmount(this,'10')">R10</button>
+      <button class="amount-btn active" onclick="selectAmount(this,'10')">R10</button>
       <button class="amount-btn" onclick="selectAmount(this,'20')">R20</button>
       <button class="amount-btn" onclick="selectAmount(this,'50')">R50</button>
-      <button class="amount-btn custom-amount-btn" onclick="selectAmount(this,'custom')" data-en="Custom" data-af="Pasgemaak" data-zh="自定义" data-tn="Go Itlhokegile" data-ts="Go Itlhokegile" data-ve="Go Itlhokegile" data-zu="Okukhethwe">Custom</button>
+      <button class="amount-btn" onclick="selectAmount(this,'100')">R100</button>
+      <button class="amount-btn" onclick="selectAmount(this,'custom')" data-i18n="custom">Custom</button>
     </div>
-
     <div id="custom-amount-wrap" style="display:none;margin:12px 0">
-      <input type="number" id="custom-amount" placeholder="Enter amount (R)" class="donate-input" data-en="Enter amount (R)" data-af="Voer bedrag in (R)" data-zh="输入金额 (R)" data-tn="Ngwala Palo (R)" data-ts="Ngwala Palo (R)" data-ve="Ngwala Palo (R)" data-zu="Bhala Imali (R)">
+      <input type="number" id="custom-amount" class="donate-input" placeholder="Enter amount (R)">
     </div>
-
-    <input type="text" id="donor-name" placeholder="Your name (optional)" class="donate-input" data-en="Your name (optional)" data-af="Jou naam (opsioneel)" data-zh="您的名字（可选）" data-tn="Leina La Gago (mang)" data-ts="Leina La Gago (mang)" data-ve="Leina La Gago (mang)" data-zu="Igama Lakho (okuzenzakalelako)">
-
-    <div class="donate-methods">
-      <div class="donate-method-title" data-en="Choose payment method:" data-af="Kies betalingsmetode:" data-zh="选择付款方式：" data-tn="Kgetha Tsela Ya Tifatso:" data-ts="Kgetha Tsela Ya Tifatso:" data-ve="Kgetha Tsela Ya Tifatso:" data-zu="Khetha Indlela Yokukhokha:">Choose payment method:</div>
-      <div class="donate-method-grid">
-        <button class="method-btn active" onclick="selectMethod(this,'payshap')">📱 PayShap</button>
-        <button class="method-btn" onclick="selectMethod(this,'capitec')">🏦 Capitec</button>
-        <button class="method-btn" onclick="selectMethod(this,'fnb')">🏦 FNB</button>
-        <button class="method-btn" onclick="selectMethod(this,'crypto')">🔗 Crypto</button>
-      </div>
+    <input type="text" id="donor-name" class="donate-input" data-i18n-ph="yourname" placeholder="Your name (optional)">
+    <div class="donate-method-title" data-i18n="choosemethod">Choose payment method:</div>
+    <div class="donate-method-grid">
+      <button class="method-btn active" onclick="selectMethod(this,'payshap')">📱 PayShap</button>
+      <button class="method-btn" onclick="selectMethod(this,'capitec')">🏦 Capitec</button>
+      <button class="method-btn" onclick="selectMethod(this,'fnb')">🏦 FNB</button>
+      <button class="method-btn" onclick="selectMethod(this,'crypto')">🔗 Crypto</button>
     </div>
-
-    <div id="method-info" class="method-info">
-      <p data-en="You will be redirected to PayPal to complete your donation securely." data-af="Jy sal na PayPal verwys word om jou donasie veilig te voltooi." data-zh="您将被重定向到 PayPal 以安全地完成您的捐赠。" data-tn="O Tla Okeletswe Go PayPal Go Phala Kaonelo Ya Gago Go Okubile." data-ts="O Tla Okeletswe Go PayPal Go Phala Kopa Ya Gago Go Okubile." data-ve="O Tla Okeletswe Go PayPal Go Phala Ipa Ya Gago Go Okubile." data-zu="Uzodeleliswa ku-PayPal ukulweza inkonzo yakho ngokuphepha.">You will be redirected to PayPal to complete your donation securely.</p>
-    </div>
-
-    <button class="donate-confirm-btn" onclick="confirmDonate()" data-en="💛 Donate Now" data-af="💛 Doneer Nou" data-zh="💛 立即捐赠" data-tn="💛 Kaonela Jaanong" data-ts="💛 Kopa Jaanong" data-ve="💛 Ipa Jaanong" data-zu="💛 Nkosela Manje">💛 Donate Now</button>
-
-    <p class="donate-note" data-en="100% goes toward running BARMAN Solutions. Thank you! 🙏" data-af="100% gaan na die bestuur van BARMAN Solutions. Dankie! 🙏" data-zh="100% 用于运营 BARMAN Solutions。谢谢！🙏" data-tn="100% Go Ya Go Phakalano Ya BARMAN Solutions. Ke A Leboga! 🙏" data-ts="100% Go Ya Go Phakalano Ya BARMAN Solutions. Ke A Leboga! 🙏" data-ve="100% Go Ya Go Phakalano Ya BARMAN Solutions. Ke A Leboga! 🙏" data-zu="100% iyang nokusetshenziswa kwe-BARMAN Solutions. Ngiyabonga! 🙏">100% goes toward running BARMAN Solutions. Thank you! 🙏</p>
+    <div id="method-info" class="method-info"></div>
+    <button class="donate-confirm-btn" onclick="confirmDonate()" data-i18n="donatenow">💛 Donate Now</button>
+    <p class="donate-note" data-i18n="donatethanks">100% goes to BARMAN Solutions. Thank you! 🙏</p>
   </div>
 </div>
 
-<!-- HELP CENTER MODAL -->
-<div id="helpModal" class="help-modal">
-  <div class="help-modal-content">
-    <span class="close-help" onclick="closeHelpCenter()">&times;</span>
-    <h2 data-en="Help Center" data-af="Hulpsentrum" data-zh="帮助中心" data-tn="Setsi Sa Thuso" data-ts="Ndzawo Ya Thuso" data-ve="Ndzawo Ya Thuso" data-zu="Umkhandlu Wokunceda">Help Center</h2>
-    
-    <div class="help-content">
-      <h3 data-en="Contact Information" data-af="Kontakinligting" data-zh="联系信息" data-tn="Tshedimoso Ya Lomagano" data-ts="Matikulukulu Ya Ku Vulanela" data-ve="Matikulukulu Ya Khethelo" data-zu="Imibono Yolwazi Lomuntu">Contact Information</h3>
-      <div class="contact-item">
-        <span class="contact-label" data-en="Email:" data-af="E-pos:" data-zh="电子邮件:" data-tn="Email:" data-ts="Email:" data-ve="Email:" data-zu="I-imeyili:">Email:</span>
-        <a href="mailto:mashabacliff458@gmail.com">mashabacliff458@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label" data-en="Phone:" data-af="Telefoon:" data-zh="电话:" data-tn="Founo:" data-ts="Foni:" data-ve="Foni:" data-zu="Ucingo:">Phone:</span>
-        <a href="tel:0603660391">0603660391</a>
-      </div>
-      <div class="contact-item">
-        <span class="contact-label" data-en="WhatsApp:" data-af="WhatsApp:" data-zh="WhatsApp:" data-tn="WhatsApp:" data-ts="WhatsApp:" data-ve="WhatsApp:" data-zu="WhatsApp:">WhatsApp:</span>
-        <a href="https://wa.me/27832880154" target="_blank">0832880154</a>
-      </div>
-      
-      <h3 data-en="Frequently Asked Questions" data-af="Gereelde Vrae" data-zh="常见问题" data-tn="Potso Tse Tlwaetse" data-ts="Mbulavulo Ya Nkoka" data-ve="Mbulavulo Ya Nkoka" data-zu="Imibuzo Evamile">Frequently Asked Questions</h3>
-      
-      <div class="faq-item">
-        <h4 data-en="How do I download wallpapers?" data-af="Hoe laai ek agtergronde af?" data-zh="我如何下载壁纸？" data-tn="Ke Laela Jang Wallpapers?" data-ts="Ku Sirisa Njani Wallpapers?" data-ve="Ku Sirisa Njani Wallpapers?" data-zu="Ngizidownload Njani I-wallpapers?">How do I download wallpapers?</h4>
-        <p data-en="Simply click the 'Download' button on any wallpaper card to save it to your device." data-af="Klik eenvoudig die 'Laai af' knoppie op enige agtergrond kaart om dit op jou toestel te stoor." data-zh="只需点击任何壁纸卡上的"下载"按钮即可将其保存到您的设备。" data-tn="Kopa Kgona go Chueta 'Laela' Kgonano go Boloka Wallpaper Go Seruragane." data-ts="Kopa Kgona go Chueta 'Sirisa' Sele Go Boloka Wallpaper Go Khomiphiwutara." data-ve="Kopa Kgona go Chueta 'Sirisa' Sele Go Boloka Wallpaper Go Khomiphiyutha." data-zu="Kufela ucinzele inkinobho 'Downloadela' kunoma iyiphi ihadi ye-wallpaper ukuze ilondoloze idivayisi yakho.">Simply click the 'Download' button on any wallpaper card to save it to your device.</p>
-      </div>
-      
-      <div class="faq-item">
-        <h4 data-en="Are the wallpapers free?" data-af="Is die agtergronde gratis?" data-zh="壁纸是免费的吗？" data-tn="Wallpapers Di Mahala Jang?" data-ts="Wallpapers Di Mahala?" data-ve="Wallpapers Di Mahala?" data-zu="Izithombe Ziyahala?">Are the wallpapers free?</h4>
-        <p data-en="Yes! All wallpapers are completely free to download and use." data-af="Ja! Alle agtergronde is volledig gratis om af te laai en te gebruik." data-zh="是的！所有壁纸都可以完全免费下载和使用。" data-tn="Eya! Wallpapers Ka Go Phela Di Mahala Go Laela Le Go Dirisa." data-ts="Eya! Wallpapers Ka Go Phela Di Mahala Go Sirisa Le Go Tirhisa." data-ve="Eya! Wallpapers Ka Go Phela Di Mahala Go Sirisa Le Go Shumisa." data-zu="Yebo! Zonke izithombe ziyahala ngokuphelele ukuzidonsela futhi zizisebenzise.">Yes! All wallpapers are completely free to download and use.</p>
-      </div>
-      
-      <div class="faq-item">
-        <h4 data-en="What is the difference between PC and Phone wallpapers?" data-af="Wat is die verskil tussen PC en Foon agtergronde?" data-zh="PC 和 Phone 壁纸有什么区别？" data-tn="Phapano E Kayang E le PC le Phone Wallpapers?" data-ts="Pharimu Ra Endzhaku Ra PC le Foni Wallpapers?" data-ve="Pharimu Ra Endzhaku Ra PC le Foni Wallpapers?" data-zu="Uyini Umehluko Phakathi Kwe-PC ne-Phone Wallpapers?">What is the difference between PC and Phone wallpapers?</h4>
-        <p data-en="PC wallpapers are optimized for larger screens with wider aspect ratios, while Phone wallpapers are designed for mobile devices with vertical orientations." data-af="PC agtergronde is geoptimaliseer vir groter skermme met wyer aspekverhoudings, terwyl Foon agtergronde vir mobiele toestelle met vertikale oriëntasies ontwerp is." data-zh="PC 壁纸针对宽宽高比的较大屏幕进行了优化，而手机壁纸则为具有垂直方向的移动设备设计。" data-tn="PC Wallpapers Di Itlhokegile Go le Scrini Tse Kgang Tse E Amanang, Go le Phone Wallpapers Di Botlhokwa Ba Seruragane Sa Mobile Di Ithuta Go Kwa E Go Nago." data-ts="PC Wallpapers Di Itlhokegile Go Scrini Tse Kgang Tse E Amanang, Go le Foni Wallpapers Di Seterene Ba Seruragane Sa Khomiphiwutara Di Ithuta Go Upela E Go Nago." data-ve="PC Wallpapers Di Itlhokegile Go Scrini Tse Kgang Tse E Amanang, Go le Foni Wallpapers Di Seterene Ba Seruragane Sa Khomiphiyutha Di Ithuta Go Upela E Go Nago." data-zu="Izithombe ze-PC ziyenziswele ezisikrinini ezikhulu ngezilinganiso zesithoba esisilinganisile, ngenkathi izithombe zefoni ziyenziswele idivayisi yezinhlelo zokusebenza ezinenqwaba ye-vertical.">PC wallpapers are optimized for larger screens with wider aspect ratios, while Phone wallpapers are designed for mobile devices with vertical orientations.</p>
+<!-- HELP MODAL -->
+<div class="modal-bg" id="help-modal">
+  <div class="modal-box help-modal-box">
+    <button class="modal-close" onclick="closeHelp()">✕</button>
+    <div class="help-header">
+      <div class="help-icon">🆘</div>
+      <h2 data-i18n="helpcenter">Help Center</h2>
+      <p data-i18n="helpsubtitle">We're here to help 24/7</p>
+    </div>
+    <div class="help-contact-cards">
+      <a class="help-card" href="mailto:mashabacliff458@gmail.com">
+        <div class="help-card-icon">📧</div>
+        <div class="help-card-label" data-i18n="email">Email</div>
+        <div class="help-card-value">mashabacliff458@gmail.com</div>
+      </a>
+      <a class="help-card" href="tel:0603660391">
+        <div class="help-card-icon">📞</div>
+        <div class="help-card-label" data-i18n="phone">Phone</div>
+        <div class="help-card-value">060 366 0391</div>
+      </a>
+      <a class="help-card" href="https://wa.me/27832880154" target="_blank">
+        <div class="help-card-icon">💬</div>
+        <div class="help-card-label">WhatsApp</div>
+        <div class="help-card-value">083 288 0154</div>
+      </a>
+    </div>
+    <div class="faq-title" data-i18n="faq">Frequently Asked Questions</div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" data-i18n="faq1q">How do I download a wallpaper?</div><div class="faq-a" data-i18n="faq1a">Click the ⬇ Download button on any wallpaper card.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" data-i18n="faq2q">Are wallpapers free?</div><div class="faq-a" data-i18n="faq2a">Yes! All wallpapers are 100% free to download and use.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" data-i18n="faq3q">PC vs Phone wallpapers?</div><div class="faq-a" data-i18n="faq3a">PC = landscape (wide). Phone = portrait (tall). Use the device tabs to filter.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" data-i18n="faq4q">How do I donate?</div><div class="faq-a" data-i18n="faq4a">Click 💛 Donate in the top bar and choose your preferred method.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" data-i18n="faq5q">How do I change language?</div><div class="faq-a" data-i18n="faq5a">Click 🌐 in the top navigation and select your language.</div></div>
+    <div class="help-hours">
+      <div class="help-card-icon">🕐</div>
+      <div>
+        <div class="hours-title" data-i18n="supporthours">Support Hours</div>
+        <div class="hours-desc" data-i18n="supporthoursdesc">Mon–Sat: 8am–8pm · Sun: 10am–4pm (SAST)</div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- MOBILE CATEGORY BAR -->
-<div class="mobile-cats">
-  <button class="cat-btn active" onclick="setCategory('All',this)">✦ All</button>
-  <button class="cat-btn" onclick="setCategory('Nature',this)">🌿 Nature</button>
-  <button class="cat-btn" onclick="setCategory('City',this)">🏙️ City</button>
-  <button class="cat-btn" onclick="setCategory('Space',this)">🌌 Space</button>
-  <button class="cat-btn" onclick="setCategory('Abstract',this)">🔮 Abstract</button>
-  <button class="cat-btn" onclick="setCategory('Dark',this)">🌑 Dark</button>
-  <button class="cat-btn" onclick="setCategory('Anime',this)">✨ Anime</button>
-  <button class="cat-btn" onclick="setCategory('Cars',this)">🚗 Cars</button>
-  <button class="cat-btn" onclick="setCategory('Technology',this)">💻 Tech</button>
 </div>
 
 <!-- FOOTER -->
@@ -257,8 +271,11 @@
       <span class="logo-sub">SOLUTIONS</span>
     </div>
   </div>
-  <p class="footer-copy" data-en="© 2026 BARMAN Solutions PTY LTD — All rights reserved" data-af="© 2026 BARMAN Solutions PTY LTD — Alle regte voorbehou" data-zh="© 2026 BARMAN Solutions PTY LTD — 版权所有" data-tn="© 2026 BARMAN Solutions PTY LTD — Boitekanelo Bja Tsohle" data-ts="© 2026 BARMAN Solutions PTY LTD — Tindlulamtano Ta Tsohle" data-ve="© 2026 BARMAN Solutions PTY LTD — Thandululo Ta Tsohle" data-zu="© 2026 BARMAN Solutions PTY LTD — Onke Amalungelo Agcinwe">© 2026 BARMAN Solutions PTY LTD — All rights reserved</p>
-  <button class="footer-donate" onclick="openDonate()" data-en="💛 Support Us" data-af="💛 Steun Ons" data-zh="💛 支持我们" data-tn="💛 Thusa Rona" data-ts="💛 Sizela Ina" data-ve="💛 Thusa Ina" data-zu="💛 Sinisekele">💛 Support Us</button>
+  <p class="footer-copy">© 2026 BARMAN Solutions PTY LTD — All rights reserved</p>
+  <div class="footer-btns">
+    <button class="footer-btn" onclick="openHelp()">❓ Help</button>
+    <button class="footer-btn" onclick="openDonate()">💛 Donate</button>
+  </div>
 </footer>
 
 <script src="script.js"></script>
