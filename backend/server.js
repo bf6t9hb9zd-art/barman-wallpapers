@@ -42,11 +42,12 @@ CREATE TABLE IF NOT EXISTS wallpapers (
     device TEXT DEFAULT 'All',
     filename TEXT NOT NULL,
     image_data BLOB,
+    imageUrl TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 `);
 
-["category TEXT DEFAULT 'General'","device TEXT DEFAULT 'All'","image_data BLOB"].forEach(col => {
+["category TEXT DEFAULT 'General'","device TEXT DEFAULT 'All'","image_data BLOB","imageUrl TEXT"].forEach(col => {
     try { db.prepare(`ALTER TABLE wallpapers ADD COLUMN ${col}`).run(); } catch {}
 });
 
@@ -73,8 +74,27 @@ app.get("/", (req, res) => res.send("BARMAN Backend Running"));
 app.get("/wallpapers", (req, res) => {
     try {
         restoreImages();
-        const rows = db.prepare("SELECT id, title, category, device, filename, created_at FROM wallpapers ORDER BY id DESC").all();
-        res.json(rows);
+        const rows = db.prepare("SELECT id, title, category, device, filename, imageUrl, created_at FROM wallpapers ORDER BY id DESC").all();
+        
+        // Convert image_data to base64 for frontend use
+        const wallpapers = rows.map(wp => {
+            let imgUrl = wp.imageUrl; // Cloudinary URL if available
+            
+            // If no Cloudinary URL, use base64 encoded blob from DB
+            if (!imgUrl) {
+                const blobData = db.prepare("SELECT image_data FROM wallpapers WHERE id = ?").get(wp.id);
+                if (blobData && blobData.image_data) {
+                    imgUrl = `data:image/jpeg;base64,${blobData.image_data.toString('base64')}`;
+                }
+            }
+            
+            return {
+                ...wp,
+                imageUrl: imgUrl
+            };
+        });
+        
+        res.json(wallpapers);
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
@@ -87,9 +107,12 @@ app.post("/upload", upload.single("image"), (req, res) => {
         const category = (req.body.category || "General").trim();
         const device = (req.body.device || "All").trim();
         const imageData = fs.readFileSync(req.file.path);
+        const cloudinaryUrl = req.body.imageUrl || null; // If frontend sends Cloudinary URL
+        
         const result = db.prepare(
-            "INSERT INTO wallpapers (title, category, device, filename, image_data) VALUES (?, ?, ?, ?, ?)"
-        ).run(title, category, device, req.file.filename, imageData);
+            "INSERT INTO wallpapers (title, category, device, filename, image_data, imageUrl) VALUES (?, ?, ?, ?, ?, ?)"
+        ).run(title, category, device, req.file.filename, imageData, cloudinaryUrl);
+        
         res.json({ success: true, id: result.lastInsertRowid });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
